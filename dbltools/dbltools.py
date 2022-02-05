@@ -79,19 +79,19 @@ class DblTools(commands.Cog):
             await client.get_guild_count()
         except (dbl.Unauthorized, dbl.UnauthorizedDetected):
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 "[DblTools cog]\n" + error_message.format(intro_msg)
             )
         except dbl.NotFound:
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 _(
                     "[DblTools cog]\nThis bot seems doesn't seems be validated on Top.gg. Please try again with a validated bot."
                 )
             )
         except dbl.errors.HTTPException:
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 _("[DblTools cog]\nFailed to contact Top.gg API. Please try again later.")
             )
         self.dbl = client
@@ -134,20 +134,20 @@ class DblTools(commands.Cog):
             await client.get_guild_count()
         except (dbl.Unauthorized, dbl.UnauthorizedDetected):
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 "[DblTools cog]\n"
                 + error_message.format(_("A wrong token has been set for dbltools cog.\n\n"))
             )
         except dbl.NotFound:
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 _(
                     "[DblTools cog]\nThis bot seems doesn't seems be validated on Top.gg. Please try again with a validated bot."
                 )
             )
         except dbl.errors.HTTPException:
             await client.close()
-            return await self.bot.send_to_owners(
+            return log.info(
                 _("[DblTools cog]\nFailed to contact Top.gg API. Please try again later.")
             )
         self.dbl = client
@@ -174,7 +174,7 @@ class DblTools(commands.Cog):
                     reason=f"Top.gg {self.bot.user.name} upvoter.",
                 )
             except discord.Forbidden:
-                await self.bot.send_to_owners(
+                await log.info(
                     _(
                         "It seems that I no longer have permissions to add roles for Top.gg upvoters "
                         "in {} `{}`. Role rewards has been disabled."
